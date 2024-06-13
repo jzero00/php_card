@@ -1,58 +1,166 @@
 <!DOCTYPE>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<?php   include $_SERVER["DOCUMENT_ROOT"]."/inc/head.inc"; ?>
-<script src="/sha/core.min.js"></script>
-<script src="/sha/sha256.min.js"></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="/css/foundation.css" />
+	<?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/header.inc"; ?>
+	<script src="/sha/core.min.js"></script>
+	<script src="/sha/sha256.min.js"></script>
+	<style>
+		.multilevel-accordion-menu .is-accordion-submenu-parent a {
+			background: #4d5158;
+		}
+
+		.multilevel-accordion-menu .is-accordion-submenu a {
+			background: #35383d;
+		}
+
+		.multilevel-accordion-menu .sublevel-1 {
+			text-indent: 1rem;
+		}
+
+		.multilevel-accordion-menu .sublevel-2 {
+			text-indent: 2rem;
+		}
+
+		.multilevel-accordion-menu .sublevel-3 {
+			text-indent: 3rem;
+		}
+
+		.multilevel-accordion-menu .sublevel-4 {
+			text-indent: 4rem;
+		}
+
+		.multilevel-accordion-menu .sublevel-5 {
+			text-indent: 5rem;
+		}
+
+		.multilevel-accordion-menu .sublevel-6 {
+			text-indent: 6rem;
+		}
+
+		.multilevel-accordion-menu a {
+			color: #fefefe;
+			box-shadow: inset 0 -1px #41444a;
+		}
+
+		.multilevel-accordion-menu a::after {
+			border-color: #fefefe transparent transparent;
+		}
+
+		.multilevel-accordion-menu .menu>li:not(.menu-text)>a {
+			padding: 1.2rem 1rem;
+		}
+
+		.multilevel-accordion-menu .is-accordion-submenu-parent[aria-expanded="true"] a.subitem::before {
+			content: "\f016";
+			font-family: FontAwesome;
+			margin-right: 1rem;
+		}
+
+		.multilevel-accordion-menu .is-accordion-submenu-parent[aria-expanded="true"] a::before {
+			content: "\f07c";
+			font-family: FontAwesome;
+			margin-right: 1rem;
+		}
+
+		.multilevel-accordion-menu .is-accordion-submenu-parent[aria-expanded="false"] a::before {
+			content: "\f07b";
+			font-family: FontAwesome;
+			margin-right: 1rem;
+		}
+
+
+		.hover-underline-menu {
+			width: 100%;
+		}
+
+		.hover-underline-menu .menu {
+			background-color: #2C3840;
+		}
+
+		.hover-underline-menu .menu a {
+			color: #fefefe;
+			padding: 1.2rem 1.5rem;
+		}
+
+		.hover-underline-menu .menu .underline-from-center {
+			position: relative;
+		}
+
+		.hover-underline-menu .menu .underline-from-center::after {
+			content: "";
+			position: absolute;
+			top: calc(100% - 0.125rem);
+			border-bottom: 0.125rem solid #fefefe;
+			left: 50%;
+			right: 50%;
+			transition: all 0.5s ease;
+		}
+
+		.hover-underline-menu .menu .underline-from-center:hover::after {
+			left: 0;
+			right: 0;
+			transition: all 0.5s ease;
+		}
+
+		td {
+			text-align: center;
+		}
+	</style>
 </head>
+
 <body>
-<div id="content">
-	<div class="navi">
-		<h2>사용자관리</h2>
-		<ul>
-			<li><a href="userMngList.php">시스템관리</a></li>
-			<li><a href="userMngList.php">사용자관리</a></li>
-		</ul>
-	</div>
-	<div class="board_inner">
-		<div class="board_title2">
-			<h3>사용자정보 등록</h3>
-		</div>
-		<form name="frm" id="frm" method="post" action="insertUser.php">	
-<!-- 			<input type="hidden" value="sub00801i.do" name="loc"> -->
-<!-- 			<input name="midchk" id="midchk" type="hidden" value="0"> -->
-			<table class="table_view">
-				<colgroup>
-					<col style="width:150px">
-					<col style="width:30%">
-					<col style="width:150px">
-					<col style="width:auto">
-				</colgroup>
+	<div id="content">
+		<div class="board_inner">
+			<div class="board_title2">
+				<h3>사용자정보 등록</h3>
+			</div>
+			<form name="frm" id="frm" method="post" action="insertUser.php">
+				<fieldset class="fieldset">
+					<legend>사용자 유형</legend>
+					<?php
+					include $_SERVER["DOCUMENT_ROOT"] . "/connect.php";
+					$sql = "SELECT * FROM card.user_auth
+											WHERE auth_useyn = 'Y'
+											ORDER BY auth_no ASC";
+
+					$result = mysqli_query($conn, $sql);
+					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+					$list = "";
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						$list = $list . '<input type="radio" id="user_auth" name="auth_no" value="' . $row["auth_no"] . '"><label for="group1">' . $row["auth_nm"] . '</label>';
+					}
+					echo $list;
+					$conn->close();
+					?>
+<!--					<input id="checkbox12" type="checkbox"><label for="checkbox12">Checkbox 1</label>
+					<input id="checkbox22" type="checkbox"><label for="checkbox22">Checkbox 2</label>
+					<input id="checkbox32" type="checkbox"><label for="checkbox32">Checkbox 3</label>-->
+				</fieldset>
+
+				<table class="table_view">
+					<colgroup>
+						<col style="width:150px">
+						<col style="width:30%">
+						<col style="width:150px">
+						<col style="width:auto">
+					</colgroup>
 					<tbody>
 						<tr>
 							<th>사용자타입</th>
 							<td colspan="3">
-								<?php
-									include $_SERVER["DOCUMENT_ROOT"]."/connect.php";
-									$sql = "SELECT * FROM safejsp.userAuth
-											WHERE authUseyn = 'Y'
-											ORDER BY authoryNo ASC";
-									
-									$result = $conn->query($sql);
-               	 					$row = $result->fetch_array(MYSQLI_ASSOC);
-									$list = "";
-									while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-										$list = $list.'<input type="radio" id="usrAuth" name="authoryNo" value="'.$row["authoryNo"].'"><label for="group1">'.$row["authNm"].'</label>';
-									}
-									echo $list;
-                					$conn->close();
-								?>
+
 							</td>
 						</tr>
 						<tr>
 							<th>ID</th>
-							<td><input type="text" name="usid" id="usid" style="width:150px"><button class="btn_sch" type="button" onclick="duple()" onkeyup="resetIdCheck()">중복확인</button></td>
+							<td><input type="text" name="usid" id="usid" style="width:150px"><button class="btn_sch"
+									type="button" onclick="duple()" onkeyup="resetIdCheck()">중복확인</button></td>
 							<th>성명</th>
 							<td><input type="text" name="userNm" id="userNm" style="width: 200px;"></td>
 						</tr>
@@ -62,16 +170,9 @@
 							<th>연락처</th>
 							<td><input type="text" style="width: 200px;" name="userTelno"></td>
 						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input type="password" style="width:150px" id="password1"></td>
-							<th>비밀번호확인</th>
-							<td><input type="password" style="width: 200px;" id="password2"></td>
-						</tr>
 					</tbody>
 				</table>
 				<input type="hidden" name="idCheck" id="idCheck" />
-				<input type="hidden" name="password" id="postPassword" />
 			</form>
 			<ul class="dw_bar">
 				<li></li>
@@ -83,31 +184,38 @@
 		</div>
 	</div>
 </body>
+<script src="<?php $_SERVER["DOCUMENT_ROOT"] ?>/js/vendor/jquery.js"></script>
+<script src="<?php $_SERVER["DOCUMENT_ROOT"] ?>/js/vendor/what-input.js"></script>
+<script src="<?php $_SERVER["DOCUMENT_ROOT"] ?>/js/vendor/foundation.min.js"></script>
+<script>
+	$(document).foundation();
+	$("[data-menu-underline-from-center] a").addClass("underline-from-center");
+</script>
 <script>
 	const idInput = document.querySelector("input#usid");
 	const idCheckInput = document.querySelector("input#idCheck");
-	idInput.addEventListener("change", function(e){
+	idInput.addEventListener("change", function (e) {
 		idCheckInput.value = false;
 	})
 
-	function duple(){
+	function duple() {
 		let usid = "";
-		
+
 		usid = document.querySelector("input#usid").value;
-		if(!blankCheck(usid)){
+		if (!blankCheck(usid)) {
 			alert("ID를 입력해주세요");
 			return false;
 		};
 
-		let data = JSON.stringify({"usid" : usid});
-		
+		let data = JSON.stringify({ "usid": usid });
+
 		$.ajax({
-			url : "usidCheck.php",
-			type : "post",
-			dataType : "json",
-			data : {"data" : data},
-			success : function(data){
-				if(data.result == "duplicated"){
+			url: "usidCheck.php",
+			type: "post",
+			dataType: "json",
+			data: { "data": data },
+			success: function (data) {
+				if (data.result == "duplicated") {
 					alert("중복된 ID가 있습니다. 다른 ID를 입력해주세요");
 					return;
 				} else {
@@ -115,38 +223,29 @@
 					document.querySelector("input#idCheck").value = true;
 				}
 			},
-			error : function(error){
+			error: function (error) {
 				alert("중복체크 오류");
 			}
-		})		
+		})
 	}
 
-	function blankCheck(id){
-		if(id == null || id == ''){
+	function blankCheck(id) {
+		if (id == null || id == '') {
 			return false;
 		}
 		return true;
 	}
 
-	function reg(){
-		if(document.getElementById("usid").value == ""){
+	function reg() {
+		if (document.getElementById("usid").value == "") {
 			alert("ID를 입력해주세요");
-		} else if (document.getElementById("userNm").value == ""){
+		} else if (document.getElementById("userNm").value == "") {
 			alert("이름을 입력해주세요");
-		} else if(document.getElementById("password1").value == ""){
-			alert("비밀번호를 입력해주세요");
-		} else if(document.getElementById("password2").value == ""){
-			alert("확인 비밀번호를 입력해주세요");
-		} else if(document.getElementById("password1").value != document.getElementById("password2").value){
-			alert("입력한 두 비밀번호가 일치하지 않습니다.");
-		} else if(document.getElementById("idCheck").value == 0){
+		} else if (document.getElementById("idCheck").value == 0) {
 			alert("ID 중복확인해부세요");
-		} else if(document.querySelectorAll("input[type=radio]").ischecked){
+		} else if (document.querySelectorAll("input[type=radio]").ischecked) {
 			alert("권한을 선택해주세요");
 		} else {
-			var shaPw = CryptoJS.SHA256(document.getElementById("password1").value).toString(); 
-			document.getElementById("postPassword").value = shaPw;
-			console.log(document.getElementById("usid").value);
 			document.querySelector("form[id=frm]").submit();
 		}
 	}
