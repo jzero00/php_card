@@ -116,7 +116,7 @@
 
 <body>
 	<div id="content">
-		<div class="board_inner">
+		<div class="grid-container">
 			<div class="board_title2">
 				<h3>사용자정보 등록</h3>
 			</div>
@@ -130,7 +130,6 @@
 											ORDER BY auth_no ASC";
 
 					$result = mysqli_query($conn, $sql);
-					$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 					$list = "";
 					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 						$list = $list . '<input type="radio" id="user_auth" name="auth_no" value="' . $row["auth_no"] . '"><label for="group1">' . $row["auth_nm"] . '</label>';
@@ -138,50 +137,33 @@
 					echo $list;
 					$conn->close();
 					?>
-<!--					<input id="checkbox12" type="checkbox"><label for="checkbox12">Checkbox 1</label>
+					<!--					<input id="checkbox12" type="checkbox"><label for="checkbox12">Checkbox 1</label>
 					<input id="checkbox22" type="checkbox"><label for="checkbox22">Checkbox 2</label>
 					<input id="checkbox32" type="checkbox"><label for="checkbox32">Checkbox 3</label>-->
 				</fieldset>
+				<div class="">
 
-				<table class="table_view">
-					<colgroup>
-						<col style="width:150px">
-						<col style="width:30%">
-						<col style="width:150px">
-						<col style="width:auto">
-					</colgroup>
-					<tbody>
-						<tr>
-							<th>사용자타입</th>
-							<td colspan="3">
-
-							</td>
-						</tr>
-						<tr>
-							<th>ID</th>
-							<td><input type="text" name="usid" id="usid" style="width:150px"><button class="btn_sch"
-									type="button" onclick="duple()" onkeyup="resetIdCheck()">중복확인</button></td>
-							<th>성명</th>
-							<td><input type="text" name="userNm" id="userNm" style="width: 200px;"></td>
-						</tr>
-						<tr>
-							<th>직위</th>
-							<td><input type="text" style="width:150px" name="userClsf"></td>
-							<th>연락처</th>
-							<td><input type="text" style="width: 200px;" name="userTelno"></td>
-						</tr>
-					</tbody>
-				</table>
-				<input type="hidden" name="idCheck" id="idCheck" />
+					<div class="input-group">
+						<span class="input-group-label">&nbsp;&nbsp;ID&nbsp;&nbsp;</span>
+						<input class="input-group-field" type="text" name="usid" id="usid">
+						<div class="input-group-button">
+							<input class="button" type="button" onclick="duple()" onkeyup="resetIdCheck()" value="중복확인">
+						</div>
+					</div>
+					<div class="input-group">
+						<span class="input-group-label">&nbsp;성명&nbsp;</span>
+						<input class="input-group-field" type="text" name="userNm" id="userNm">
+					</div>
+					<div class="input-group">
+						<span class="input-group-label">전화번호</span>
+						<input class="input-group-field" type="text" name="userTelno">
+					</div>
+					<input type="hidden" name="idCheck" id="idCheck" />
 			</form>
-			<ul class="dw_bar">
-				<li></li>
-				<li>
-					<a onclick="reg()">저장</a>
-					<a onclick="history.back(-1)">취소</a>
-				</li>
-			</ul>
+			<a class="button" onclick="reg()">등록</a>
+			<a class="button" onclick="history.back(-1)">취소</a>
 		</div>
+	</div>
 	</div>
 </body>
 <script src="<?php $_SERVER["DOCUMENT_ROOT"] ?>/js/vendor/jquery.js"></script>
