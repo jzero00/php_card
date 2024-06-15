@@ -174,6 +174,7 @@
                         <th>아이디</th>
                         <th>이름</th>
                         <th>휴대폰번호</th>
+                        <th>권한</th>
                     </tr>
                     <?php echo $list; ?>
                 </table>
