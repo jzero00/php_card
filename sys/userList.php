@@ -114,10 +114,9 @@
 <body>
     <?php include "./selectUserList.php"; ?>
     <?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/header.inc"; ?>
-    <div id="content">
-        <div class="board">
-            <div class="board_inner">
-                <!--
+    <div class="grid-container">
+        <div class="board_inner">
+            <!--
                 <table class="sch_table">
                     <colgroup>
                         <col style="width:140px">
@@ -154,47 +153,39 @@
                     </tr>
                 </table>
                 -->
-                <div class="callout clearfix button-group align-right">
-                        <a class="button" href="<?php echo htmlspecialchars('userReg.php') ?>">등록</a>
-                        <a class="success button">수정</a>
-                        <a class="alert button" onclick="deleteUser()">삭제</a>
-                </div>
-
-                <table>
-                    <colgroup>
-                        <col style="width:10%">
-                        <col style="width:auto">
-                        <col style="width:auto">
-                        <col style="width:auto">
-                        <col style="width:auto">
-                    </colgroup>
-                    <tr>
-                        <th><input type="checkbox"></th>
-                        <th>No.</th>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>휴대폰번호</th>
-                        <th>권한</th>
-                    </tr>
-                    <?php echo $list; ?>
-                </table>
-                <form id="searchForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
-                    <input type='hidden' name="page"
-                        value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['page']) : print (1) ?>" />
-                    <input type='hidden' name="keyword"
-                        value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['keyword']) : '' ?>" />
-                    <input type='hidden' name="searchType"
-                        value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['searchType']) : '' ?>" />
-                    <input type='hidden' name="cnSe"
-                        value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['cnSe']) : '' ?>" />
-                </form>
-                <!-- 					<ul class="dw_bar"> -->
-                <!-- 						<li><a href="sub071.php">목록</a></li> -->
-                <!-- 					</ul> -->
-                <ul class="page_bar">
-                    <?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/pagination.php"; ?>
-                </ul>
+            <div class="callout clearfix button-group align-right">
+                <a class="button" href="<?php echo htmlspecialchars('userReg.php') ?>">등록</a>
+                <a class="success button">수정</a>
+                <a class="alert button" onclick="deleteUser()">삭제</a>
             </div>
+            <table>
+                <colgroup>
+                    <col style="width:10%">
+                    <col style="width:auto">
+                    <col style="width:auto">
+                    <col style="width:auto">
+                    <col style="width:auto">
+                </colgroup>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>No.</th>
+                    <th>아이디</th>
+                    <th>이름</th>
+                    <th>휴대폰번호</th>
+                    <th>권한</th>
+                </tr>
+                <?php echo $list; ?>
+            </table>
+            <form id="searchForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+                <input type='hidden' name="page" value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['page']) : print (1) ?>" />
+                <input type='hidden' name="keyword" value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['keyword']) : '' ?>" />
+                <input type='hidden' name="searchType" value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['searchType']) : '' ?>" />
+                <input type='hidden' name="cnSe" value="<?php $_SERVER["REQUEST_METHOD"] == "POST" ? print ($_POST['cnSe']) : '' ?>" />
+            </form>
+            <!-- 					<ul class="dw_bar"> -->
+            <!-- 						<li><a href="sub071.php">목록</a></li> -->
+            <!-- 					</ul> -->
+                <?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/pagination.php"; ?>
         </div>
     </div>
 </body>
@@ -244,5 +235,4 @@
         document.querySelector("form#searchForm").submit();
     }
 </script>
-
 </html>

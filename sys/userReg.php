@@ -126,8 +126,8 @@
 					<?php
 					include $_SERVER["DOCUMENT_ROOT"] . "/connect.php";
 					$sql = "SELECT * FROM card.user_auth
-											WHERE auth_useyn = 'Y'
-											ORDER BY auth_no ASC";
+							WHERE auth_useyn = 'Y'
+							ORDER BY auth_no ASC";
 
 					$result = mysqli_query($conn, $sql);
 					$list = "";
@@ -142,7 +142,6 @@
 					<input id="checkbox32" type="checkbox"><label for="checkbox32">Checkbox 3</label>-->
 				</fieldset>
 				<div class="">
-
 					<div class="input-group">
 						<span class="input-group-label">&nbsp;&nbsp;ID&nbsp;&nbsp;</span>
 						<input class="input-group-field" type="text" name="usid" id="usid">

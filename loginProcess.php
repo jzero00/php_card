@@ -5,7 +5,7 @@
     $user_id=$_POST['usid'];
     $user_pw=$_POST['password'];
 
-    $sql = "SELECT * FROM safejsp.user WHERE usid='$user_id' AND password = '$user_pw'";
+    $sql = "SELECT * FROM card.user WHERE usid='$user_id' AND password = '$user_pw'";
     $result = $conn->query($sql);
     $row = $result->fetch_array(MYSQLI_ASSOC);
 

@@ -1,27 +1,21 @@
 <?php
 include $_SERVER["DOCUMENT_ROOT"] . "/connect.php";
 $offset = 0;
-if (isset($_POST["page"]) && $_POST["page"] != 1)
+if (isset($_POST["page"]) && $_POST["page"] != 1) {
     $offset = 10 * ($_POST["page"] - 1);
+}
 $where = '';
 $searchType = '';
 $keyword = '';
 
-if (isset($_POST['searchType']))
-    $searchType = $_POST['searchType'];
-if (isset($_POST['keyword']))
-    $keyword = $_POST['keyword'];
-if (isset($_POST['offset']))
-    $offset = $_POST['offset'];
+if (isset($_POST['searchType'])) $searchType = $_POST['searchType'];
+if (isset($_POST['keyword'])) $keyword = $_POST['keyword'];
+if (isset($_POST['offset'])) $offset = $_POST['offset'];
 
-if ($searchType === 'nm')
-    $where = $where . "AND (userNm LIKE CONCAT('%','" . $keyword . "','%'))";
-if ($searchType === 'id')
-    $where = $where . "AND (usid LIKE CONCAT('%','" . $keyword . "','%'))";
-if ($searchType === 'pn')
-    $where = $where . "AND (userTelno LIKE CONCAT('%','" . $keyword . "','%'))";
-if ($searchType === 'ed')
-    $where = $where . "AND (userEndde LIKE CONCAT('%','" . $keyword . "','%'))";
+if ($searchType === 'nm') $where = $where . "AND (userNm LIKE CONCAT('%','" . $keyword . "','%'))";
+if ($searchType === 'id') $where = $where . "AND (usid LIKE CONCAT('%','" . $keyword . "','%'))";
+if ($searchType === 'pn') $where = $where . "AND (userTelno LIKE CONCAT('%','" . $keyword . "','%'))";
+if ($searchType === 'ed') $where = $where . "AND (userEndde LIKE CONCAT('%','" . $keyword . "','%'))";
 
 $sql = "SELECT u.seq, u.usid, u.user_nm, u.user_tel_no, ua.auth_nm
         FROM card.`user` u, card.user_auth ua
@@ -34,9 +28,9 @@ $result = mysqli_query($conn, $sql);
 //$row = $result->fetch_array(MYSQLI_ASSOC); ?? 왜 result 하나가빠짐?
 
 $cnt_sql = "SELECT COUNT(*) as cnt
-                FROM safejsp.user u, safejsp.userAuth ua
-                WHERE 1=1
-                AND u.authoryNo = ua.authoryNo " . $where;
+            FROM card.user u, card.user_auth ua
+            WHERE 1=1
+            AND u.user_ty = ua.auth_no " . $where;
 
 $cnt_res = $conn->query($cnt_sql);
 $cnt = $cnt_res->fetch_array(MYSQLI_ASSOC);
