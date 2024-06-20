@@ -11,6 +11,7 @@ $keyword = '';
 if (isset($_POST['searchType'])) $searchType = $_POST['searchType'];
 if (isset($_POST['keyword'])) $keyword = $_POST['keyword'];
 if (isset($_POST['offset'])) $offset = $_POST['offset'];
+if (!isset($_POST['page'])) $page = 1;
 
 if ($searchType === 'nm') $where = $where . "AND (userNm LIKE CONCAT('%','" . $keyword . "','%'))";
 if ($searchType === 'id') $where = $where . "AND (usid LIKE CONCAT('%','" . $keyword . "','%'))";

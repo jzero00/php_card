@@ -20,7 +20,7 @@
         $stmt->close();
         $conn->close();
         
-        $result = "<script>alert('등록 성공');location.href='/system/userMngList.php'</script>";
+        $result = "<script>alert('등록 성공');location.href='/sys/userList.php'</script>";
     } catch (Exception $e){
         $stmt->close();
         $conn->close();
