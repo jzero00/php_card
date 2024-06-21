@@ -3,8 +3,9 @@ $limit = 10;
 $endPage = $cnt / $limit;
 $endPage = (int) $endPage + 1;
 $startPage = 1;
-if($_POST["page"] != 1) $startPage = $_POST["page"];
+if(isset($_POST['page']) && $_POST["page"] != 1) $page = $_POST["page"];
 $realEndPage = $endPage;
+
 ?>
 <style>
 	@media screen and (max-width: 39.9375em) {
@@ -23,18 +24,21 @@ $realEndPage = $endPage;
 		}
 	}
 </style>
-<ul class="pagination text-center" role="navigation" aria-label="Pagination" data-page="6" data-total="16">
-	<li>
-		<a href="javascript:search_list_go(1);">이전</a>
-	</li>
-	<!-- <li >
-	<a href="javascript:search_list_go('${pageMaker.prev ? pageMaker.startPage-1 : 1}');"><i class="fas fa-angle-left"></i></a>
-</li> -->
-	<!--<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">						
-	<li class="page-item <c:out value="${pageMaker.cri.page == pageNum?'active':''}"/>
-	<a href="javascript:search_list_go(${pageNum});" >${pageNum }</a>
-</li>
-</c:forEach>-->
+<nav>
+	<ul></ul>
+	<ul class="pagination text-center" role="navigation" aria-label="Pagination" data-page="6" data-total="16">
+		<li>
+			<button>이전<a href="javascript:search_list_go(1);"></a></button>
+		</li>
+
+		<!-- <li >
+			<a href="javascript:search_list_go('${pageMaker.prev ? pageMaker.startPage-1 : 1}');"><i class="fas fa-angle-left"></i></a>
+		</li> -->
+		<!--<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">						
+			<li class="page-item <c:out value="${pageMaker.cri.page == pageNum?'active':''}"/>
+			<a href="javascript:search_list_go(${pageNum});" >${pageNum }</a>
+		</li>
+	</c:forEach>-->
 	<?php
 	$button = "";
 	$cnt = 0;
@@ -48,12 +52,14 @@ $realEndPage = $endPage;
 	}
 	?>
 	<!-- <li>
-	<a href="javascript:search_list_go(${pageMaker.next ? pageMaker.endPage+1 : pageMaker.cri.page});"><i class="fas fa-angle-right" ></i></a>
-</li> -->
+		<a href="javascript:search_list_go(${pageMaker.next ? pageMaker.endPage+1 : pageMaker.cri.page});"><i class="fas fa-angle-right" ></i></a>
+	</li> -->
 	<li>
-		<a href="javascript:search_list_go(<?php print ($realEndPage) ?>);">다음</a>
+		<button onclick='search_list_go(<?php print ($realEndPage) ?>);'>다음</button>
 	</li>
 </ul>
+<ul></ul>
+</nav>
 <script>
 	function search_list_go(pageNo) {
 		let searhForm = document.querySelector("#searchForm");

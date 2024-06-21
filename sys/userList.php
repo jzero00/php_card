@@ -52,7 +52,7 @@
                 </table>
                 -->
             <div class="callout clearfix button-group align-right">
-                <button class="pico-background-cyan-300"><a href="<?php echo htmlspecialchars('userReg.php') ?>"></a>등록</button>
+                <button class="pico-background-cyan-300" onclick="insertUser()">등록</button>
                 <button>수정</button>
                 <button onclick="deleteUser()">삭제</button>
             </div>
@@ -88,6 +88,10 @@
 </body>
 
 <script>
+    function insertUser(){
+        location.href = "<?php echo htmlspecialchars('userReg.php') ?>";
+    }
+
     function search() {
         var searhForm = document.querySelector("#searchForm");
         console.log(searhForm);
