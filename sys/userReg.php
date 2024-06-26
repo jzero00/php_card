@@ -11,6 +11,7 @@
 	<?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/header.inc"; ?>
 	<script src="/sha/core.min.js"></script>
 	<script src="/sha/sha256.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -39,27 +40,20 @@
 					<input id="checkbox22" type="checkbox"><label for="checkbox22">Checkbox 2</label>
 					<input id="checkbox32" type="checkbox"><label for="checkbox32">Checkbox 3</label>-->
 			</fieldset>
-			<fieldset class="grid">
+			<p>ID</p>
+			<fieldset role="group">
 					<input name="usid" id="usid" placeholder="ID" autocomplete="given-name" />
-					<input class="button" type="button" onclick="duple()" onkeyup="resetIdCheck()" value="중복확인">
+					<input type="button" onclick="duple()" onkeyup="resetIdCheck()" value="중복확인">
 			</fieldset>
-				<div class="">
-					<div class="input-group">
-						<span class="input-group-label">&nbsp;&nbsp;ID&nbsp;&nbsp;</span>
-						<input class="input-group-field" type="text" name="" id="usid">
-						<div class="input-group-button">
-							
-						</div>
-					</div>
-					<div class="input-group">
-						<span class="input-group-label">&nbsp;성명&nbsp;</span>
-						<input class="input-group-field" type="text" name="userNm" id="userNm">
-					</div>
-					<div class="input-group">
-						<span class="input-group-label">전화번호</span>
-						<input class="input-group-field" type="text" name="userTelno">
-					</div>
-					<input type="hidden" name="idCheck" id="idCheck" />
+			<div>
+                <label for="userName">성명</label>
+                <input type="text" id="userNm" name="userNm" required>
+            </div>
+            <div>
+                <label for="userPhone">전화번호</label>
+                <input type="tel" id="userTelno" name="userTelno" required>
+            </div>
+			<input type="hidden" name="idCheck" id="idCheck" />
 		</form>
 		<a class="button" onclick="reg()">등록</a>
 		<a class="button" onclick="history.back(-1)">취소</a>
