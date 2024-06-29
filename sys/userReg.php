@@ -42,21 +42,22 @@
 			</fieldset>
 			<p>ID</p>
 			<fieldset role="group">
-					<input name="usid" id="usid" placeholder="ID" autocomplete="given-name" />
-					<input type="button" onclick="duple()" onkeyup="resetIdCheck()" value="중복확인">
+				<input name="usid" id="usid" placeholder="ID" autocomplete="given-name" />
+				<input type="button" onclick="duple()" onkeyup="resetIdCheck()" value="중복확인">
 			</fieldset>
 			<div>
-                <label for="userName">성명</label>
-                <input type="text" id="userNm" name="userNm" required>
-            </div>
-            <div>
-                <label for="userPhone">전화번호</label>
-                <input type="tel" id="userTelno" name="userTelno" required>
-            </div>
+				<label for="userName">성명</label>
+				<input type="text" id="userNm" name="userNm" required>
+			</div>
+			<div>
+				<label for="userPhone">전화번호</label>
+				<input type="tel" id="userTelno" name="userTelno" required>
+			</div>
 			<input type="hidden" name="idCheck" id="idCheck" />
 		</form>
-		<a class="button" onclick="reg()">등록</a>
-		<a class="button" onclick="history.back(-1)">취소</a>
+		<div class="callout clearfix button-group align-right">
+			<button onclick="reg()">등록</button>
+			<button onclick="history.back(-1)">취소</button>
 		</div>
 	</main>
 </body>
