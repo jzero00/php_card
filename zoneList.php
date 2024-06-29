@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -16,12 +17,25 @@
 </body>
 <script>
   document.querySelectorAll('summary').forEach(e => {
-    e.addEventListener('click', function() {
-      console.log(e);
+    e.addEventListener('click', function () {
       const id = e.getAttribute('data-id');
-      console.log(id);
-      
-  });
+
+      $.ajax({
+        url: "selectCardList.php",
+        type: "post",
+        dataType: "json",
+        data: { "id" : id },
+        success: function (data) {
+          console.log(data);
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      }).done(function(result){
+        console.log(result);
+        e.innerHTML = data;
+      });
+    });
   });
 </script>
 
