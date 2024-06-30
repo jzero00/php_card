@@ -1,25 +1,64 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion List with Pico CSS and jQuery</title>
+    <link rel="stylesheet" href="https://unpkg.com/pico-css@2.x.x/dist/pico.min.css">
+    <style>
+        /* Custom styles if needed */
+        .accordion-content {
+            display: none;
+        }
+    </style>
 </head>
-
 <body>
     <main class="container">
-        ...
-        <div class="grid">
-            <nav>
-                <ul></ul>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><button class="secondary">Products</button></li>
-                </ul>
-                <ul></ul>
-            </nav>
-        </div>
-
+        <h1>Accordion List Page</h1>
+        <section id="accordion-list">
+            <article>
+                <header class="accordion-header" data-id="1">Section 1</header>
+                <div class="accordion-content" id="content-1"></div>
+            </article>
+            <article>
+                <header class="accordion-header" data-id="2">Section 2</header>
+                <div class="accordion-content" id="content-2"></div>
+            </article>
+            <article>
+                <header class="accordion-header" data-id="3">Section 3</header>
+                <div class="accordion-content" id="content-3"></div>
+            </article>
+            <!-- Add more sections as needed -->
+        </section>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.accordion-header').on('click', function() {
+                var sectionId = $(this).data('id');
+                var contentDiv = $('#content-' + sectionId);
+                
+                if (contentDiv.is(':visible')) {
+                    contentDiv.slideUp();
+                } else {
+                    $('.accordion-content').slideUp(); // Close all open sections
+                    contentDiv.slideDown(); // Open clicked section
+                    
+                    // AJAX request to fetch data
+                    $.ajax({
+                        url: 'https://your-api-endpoint.com/section/' + sectionId,
+                        method: 'GET',
+                        success: function(data) {
+                            // Assuming data contains the HTML content
+                            contentDiv.html(data);
+                        },
+                        error: function(xhr, status, error) {
+                            contentDiv.html('<p>Error loading content</p>');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>

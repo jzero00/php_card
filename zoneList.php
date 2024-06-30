@@ -19,23 +19,36 @@
   document.querySelectorAll('summary').forEach(e => {
     e.addEventListener('click', function () {
       const id = e.getAttribute('data-id');
+      const div = e.parentElement.querySelectorAll("div");
 
-      $.ajax({
-        url: "selectCardList.php",
-        type: "post",
-        dataType: "json",
-        data: { "id" : id },
-        success: function (data) {
-          console.log(data);
-        },
-        error: function (error) {
-          console.log(error);
-        }
-      }).done(function(result){
-        console.log(result);
-        e.innerHTML = data;
-      });
+      if (div[0].style.display == 'none') {
+        
+      } else if ((div[0].style.display == 'block')){
+
+        $.ajax({
+          url: "selectCardList.php",
+          type: "post",
+          dataType: "json",
+          data: { "id": id },
+          success: function (data) {
+            div[0].innerHTML = "";
+            let html = "";
+            for (i = 0; i < data.card_no.length; i++) {
+              let article = document.createElement('article');
+              article.innerText = data.card_no[i] + ". " + data.card_nm[i];
+              //button.classList.add("button-card");
+              div[0].appendChild(article);
+            }
+          },
+          error: function (error) {
+            console.log(error);
+          }
+        }).done(function(){
+          div[0].style.cssText == 'display : block;';
+        });
+      }
     });
+
   });
 </script>
 
