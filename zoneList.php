@@ -7,11 +7,21 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    .right-aligned {
+      display: flex;
+      justify-content: flex-end;
+      margin: 1em 0;
+    }
+  </style>
 </head>
 
 <body>
   <?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/header.inc"; ?>
   <main class="container">
+    <div class="right-aligned">
+      <button>구역추가</button>
+    </div>
     <?php include "./selectZoneList.php" ?>
   </main>
 </body>
@@ -22,8 +32,8 @@
       const div = e.parentElement.querySelectorAll("div");
 
       if (div[0].style.display == 'none') {
-        
-      } else if ((div[0].style.display == 'block')){
+
+      } else if ((div[0].style.display == 'block')) {
 
         $.ajax({
           url: "selectCardList.php",
@@ -43,7 +53,7 @@
           error: function (error) {
             console.log(error);
           }
-        }).done(function(){
+        }).done(function () {
           div[0].style.cssText == 'display : block;';
         });
       }
