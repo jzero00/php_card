@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/js/common.js"></script>
   <style>
     .right-aligned {
       display: flex;
@@ -20,7 +21,7 @@
   <?php include $_SERVER["DOCUMENT_ROOT"] . "/inc/header.inc"; ?>
   <main class="container">
     <div class="right-aligned">
-      <button>구역추가</button>
+      <button onclick="moveUrl('zoneReg.php')">구역추가</button>
     </div>
     <?php include "./selectZoneList.php" ?>
   </main>
